@@ -101,7 +101,8 @@ var Password = React.createClass({
       rePswIconState: 0,
       rePswInputBg: '',
       psw: '',
-      rePsw: ''
+      rePsw: '',
+      errMsgState: 0
     };
     
   },
@@ -120,12 +121,14 @@ var Password = React.createClass({
     if(e.target.value === this.state.psw) {
       this.setState({
         rePswIconState: 1,
+        errMsgState: 0,
         rePswInputBg: ''
       });
     }
     else {
       this.setState({
         rePswIconState: 0,
+        errMsgState: 1,
         rePswInputBg: '#FEE0A9'
       });
     }
@@ -162,12 +165,14 @@ var Password = React.createClass({
       <input type="password" placeholder="输入密码" 
       className="rct-form-control"
       onChange={this.handleChange} />
+      <span className="err-msg" style={{opacity:this.state.errMsgState}} >*两次密码不一致</span>
       <img src="/images/pass.png" className="rePsw-pass-icon" style={{opacity:this.state.rePswIconState}} />
       <input type="password" placeholder="再次输入" className="rct-form-control"
       onChange={this.handleReChange}
       style={{background:this.state.rePswInputBg}}
       />
-      <p>密码强度：<span><i style={{left:this.state.pswStrength +'px'}}></i></span></p>
+
+      <p>密码强度：<span className="psw-strength"><i style={{left:this.state.pswStrength +'px'}}></i></span></p>
     </div>
   }
 });
